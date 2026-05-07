@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude — Your Intelligent Thinking Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EE;
+    --ink: #1A1714;
+    --ink-light: #4A4540;
+    --ink-muted: #8A847D;
+    --terra: #C4632A;
+    --terra-light: #E8A070;
+    --sage: #3D6B4F;
+    --sage-light: #A8C9B4;
+    --gold: #B8962E;
+    --gold-light: #E8D090;
+    --border: rgba(26,23,20,0.12);
+    --border-strong: rgba(26,23,20,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(247,244,238,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--ink);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark svg { width: 18px; height: 18px; }
+  .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--ink-light);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink) !important;
+    color: var(--cream) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.8 !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 60%, rgba(196,99,42,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 30%, rgba(61,107,79,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 50% 90%, rgba(184,150,46,0.05) 0%, transparent 60%);
+  }
+  .hero-ornament {
+    position: absolute;
+    width: 600px; height: 600px;
+    border: 0.5px solid rgba(26,23,20,0.06);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slow-spin 60s linear infinite;
+  }
+  .hero-ornament-2 {
+    position: absolute;
+    width: 900px; height: 900px;
+    border: 0.5px solid rgba(26,23,20,0.04);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slow-spin 90s linear infinite reverse;
+  }
+  @keyframes slow-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  .hero-badge {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 0.5px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    background: rgba(247,244,238,0.7);
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .hero h1 {
+    position: relative; z-index: 1;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-align: center;
+    max-width: 900px;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terra);
+  }
+  .hero-sub {
+    position: relative; z-index: 1;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--ink-light);
+    text-align: center;
+    max-width: 560px;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    position: relative; z-index: 1;
+    display: flex; gap: 1rem; align-items: center;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 0.85rem 2.2rem;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--terra); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 0.5px solid var(--border-strong);
+    padding: 0.85rem 2.2rem;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--ink); background: rgba(26,23,20,0.04); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    z-index: 1;
+  }
+  .scroll-label { font-size: 0.75rem; letter-spacing: 0.08em; color: var(--ink-muted); text-transform: uppercase; }
+  .scroll-line { width: 0.5px; height: 40px; background: linear-gradient(to bottom, var(--ink-muted), transparent); animation: scroll-down 2s ease-in-out infinite; }
+  @keyframes scroll-down { 0%,100% { transform: scaleY(1); opacity: 1; } 50% { transform: scaleY(0.5); opacity: 0.5; } }
+
+  /* SECTION SHARED */
+  section { padding: 7rem 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+  .section-title em { font-style: italic; color: var(--terra); }
+  .section-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-light);
+    max-width: 500px;
+    line-height: 1.7;
+  }
+
+  /* PURPOSE */
+  .purpose {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .purpose-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .purpose-left .section-label { color: var(--terra-light); }
+  .purpose-left .section-title { color: var(--cream); }
+  .purpose-left .section-title em { color: var(--terra-light); }
+  .purpose-left .section-sub { color: rgba(247,244,238,0.6); max-width: 100%; }
+  .purpose-right {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .purpose-stat {
+    border-top: 0.5px solid rgba(247,244,238,0.1);
+    padding-top: 1.5rem;
+  }
+  .purpose-stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .purpose-stat .num span { color: var(--terra-light); }
+  .purpose-stat p { font-size: 0.9rem; color: rgba(247,244,238,0.5); font-weight: 300; }
+
+  /* ARCHITECTURE */
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 4rem;
+  }
+  .arch-card {
+    background: var(--cream);
+    padding: 2.5rem 2rem;
+    transition: background 0.25s;
+  }
+  .arch-card:hover { background: white; }
+  .arch-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    border: 0.5px solid var(--border-strong);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+  }
+  .arch-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+  }
+  .arch-card p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; font-weight: 300; }
+  .arch-tag {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--terra);
+    font-weight: 500;
+  }
+
+  /* SERVICES */
+  .services { background: white; }
+  .services-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 0.5px solid transparent;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .service-card:hover { border-color: var(--border-strong); background: white; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(26,23,20,0.06); }
+  .service-card:hover::before { background: var(--terra); }
+  .service-card.featured { background: var(--ink); }
+  .service-card.featured::before { background: var(--terra-light); }
+  .service-card.featured h3, .service-card.featured .service-desc { color: var(--cream); }
+  .service-card.featured .service-list li { color: rgba(247,244,238,0.6); border-color: rgba(247,244,238,0.1); }
+  .service-card.featured .service-num { color: rgba(247,244,238,0.2); }
+  .service-num {
+    font-family: 'Fraunces', serif;
+    font-size: 0.85rem;
+    color: rgba(26,23,20,0.2);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+  .service-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.7rem;
+    line-height: 1.15;
+  }
+  .service-desc { font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; font-weight: 300; margin-bottom: 1.5rem; }
+  .service-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .service-list li {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    padding: 0.6rem 0;
+    border-bottom: 0.5px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 300;
+  }
+  .service-list li::before { content: '→'; font-size: 0.7rem; color: var(--terra); flex-shrink: 0; }
+
+  /* DEMO / CHAT */
+  .demo { background: var(--cream); }
+  .demo-container {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .chat-window {
+    background: white;
+    border-radius: 20px;
+    border: 0.5px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(26,23,20,0.08);
+  }
+  .chat-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    background: var(--cream);
+  }
+  .chat-avatar {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .chat-avatar svg { width: 16px; height: 16px; fill: var(--cream); }
+  .chat-name { font-size: 0.875rem; font-weight: 500; }
+  .chat-status { font-size: 0.75rem; color: var(--sage); display: flex; align-items: center; gap: 5px; }
+  .status-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sage); }
+  .chat-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .msg { max-width: 85%; }
+  .msg.user { align-self: flex-end; }
+  .msg.user .bubble {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 16px 16px 4px 16px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .msg.claude .bubble {
+    background: var(--cream);
+    border: 0.5px solid var(--border);
+    border-radius: 4px 16px 16px 16px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .msg-label { font-size: 0.7rem; color: var(--ink-muted); margin-bottom: 4px; letter-spacing: 0.03em; }
+  .chat-input-bar {
+    padding: 1rem 1.5rem;
+    border-top: 0.5px solid var(--border);
+    display: flex; gap: 10px; align-items: center;
+  }
+  .chat-input {
+    flex: 1;
+    background: var(--cream);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.875rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink-muted);
+    outline: none;
+  }
+  .send-btn {
+    width: 34px; height: 34px;
+    background: var(--ink);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .send-btn:hover { background: var(--terra); }
+  .send-btn svg { width: 14px; height: 14px; stroke: var(--cream); fill: none; }
+
+  /* PRINCIPLES */
+  .principles { background: white; }
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+  .principle-item { }
+  .principle-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: rgba(26,23,20,0.1);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .principle-item h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.015em;
+  }
+  .principle-item p { font-size: 0.875rem; color: var(--ink-light); line-height: 1.65; font-weight: 300; }
+
+  /* HOW IT WORKS */
+  .how { background: var(--cream); }
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 4rem; max-width: 700px; }
+  .step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 0.5px solid var(--border);
+    align-items: start;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--terra);
+    line-height: 1;
+  }
+  .step h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .step p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; font-weight: 300; }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--ink); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .testi-card {
+    background: rgba(247,244,238,0.05);
+    border: 0.5px solid rgba(247,244,238,0.1);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .testi-card blockquote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+  .testi-author { display: flex; align-items: center; gap: 10px; }
+  .testi-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--terra);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--cream);
+  }
+  .testi-name { font-size: 0.875rem; font-weight: 500; color: var(--cream); }
+  .testi-role { font-size: 0.75rem; color: rgba(247,244,238,0.4); margin-top: 1px; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--cream);
+    text-align: center;
+    padding: 10rem 2rem;
+  }
+  .cta-section .section-title { margin: 0 auto 1.2rem; max-width: 700px; }
+  .cta-section .section-sub { margin: 0 auto 3rem; text-align: center; max-width: 480px; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cream);
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--ink-muted); }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a { font-size: 0.8rem; color: var(--ink-muted); text-decoration: none; }
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ANIMATIONS */
+  @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fade-up 0.8s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .delay-3 { animation-delay: 0.35s; opacity: 0; }
+  .delay-4 { animation-delay: 0.5s; opacity: 0; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .purpose-grid, .demo-container, .services-header { grid-template-columns: 1fr; }
+    .arch-grid { grid-template-columns: 1fr; }
+    .principles-grid { grid-template-columns: repeat(2, 1fr); }
+    .testi-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .hero { padding: 7rem 1.5rem 5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L16 6.5V11.5L9 16L2 11.5V6.5L9 2Z" fill="#F7F4EE" opacity="0.9"/>
+        <circle cx="9" cy="9" r="2.5" fill="#C4632A"/>
+      </svg>
+    </div>
+    Claude
+  </a>
+  <div class="nav-links">
+    <a href="#architecture">Architecture</a>
+    <a href="#services">Services</a>
+    <a href="#how">How It Works</a>
+    <a href="#principles">Principles</a>
+    <a href="#" class="nav-cta">Start Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-ornament-2"></div>
+
+  <div class="hero-badge fade-up">
+    <div class="badge-dot"></div>
+    Now available — Claude Sonnet 4.6
+  </div>
+
+  <h1 class="fade-up delay-1">
+    Think deeper.<br>
+    Create <em>freely.</em><br>
+    Build boldly.
+  </h1>
+
+  <p class="hero-sub fade-up delay-2">
+    Claude is your intelligent thinking partner — an AI assistant built for depth, nuance, and genuine helpfulness across writing, analysis, code, and conversation.
+  </p>
+
+  <div class="hero-actions fade-up delay-3">
+    <a href="#" class="btn-primary">
+      Start for free
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+    </a>
+    <a href="#services" class="btn-secondary">Explore services</a>
+  </div>
+
+  <div class="hero-scroll fade-up delay-4">
+    <span class="scroll-label">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- PURPOSE -->
+<section class="purpose" id="purpose">
+  <div class="container">
+    <div class="purpose-grid">
+      <div class="purpose-left">
+        <p class="section-label">Our purpose</p>
+        <h2 class="section-title">AI that's <em>genuinely</em> on your side</h2>
+        <p class="section-sub" style="color:rgba(247,244,238,0.6); margin-top: 1.2rem; font-size: 1rem; line-height: 1.75;">
+          Claude isn't just a tool. It's a thinking partner designed with honesty, safety, and depth at its core. Created by Anthropic to be helpful, harmless, and honest — Claude works with you, not just for you.
+          <br><br>
+          Whether you're a student, researcher, engineer, writer, or entrepreneur — Claude adapts to you, understands context, and provides substantive, nuanced assistance that respects your intelligence.
+        </p>
+      </div>
+      <div class="purpose-right">
+        <div class="purpose-stat">
+          <div class="num">200<span>K</span></div>
+          <p>Context window — hold entire books, codebases, or research papers in a single conversation</p>
+        </div>
+        <div class="purpose-stat">
+          <div class="num">95<span>%</span></div>
+          <p>Accuracy on complex reasoning benchmarks, outperforming most frontier models</p>
+        </div>
+        <div class="purpose-stat">
+          <div class="num">3<span>x</span></div>
+          <p>More likely to give a nuanced answer than confidently incorrect output</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="container">
+    <p class="section-label">Architecture</p>
+    <h2 class="section-title">How Claude <em>thinks</em></h2>
+    <p class="section-sub">Six core systems, working in harmony to give you responses that are thoughtful, accurate, and deeply contextual.</p>
+
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-icon">🧠</div>
+        <h3>Constitutional AI</h3>
+        <p>Claude is trained using a set of principles — a constitution — that guides its behavior. It learns not just what to do, but why, enabling nuanced ethical judgment rather than rigid rule-following.</p>
+        <span class="arch-tag">Safety Layer</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">📖</div>
+        <h3>Long Context Memory</h3>
+        <p>With a 200,000 token context window, Claude can reason over entire documents, codebases, or novels. No summarization loss. The full picture, always in focus.</p>
+        <span class="arch-tag">Context Engine</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🔍</div>
+        <h3>Real-Time Web Search</h3>
+        <p>Claude can query the web to retrieve current information — news, documentation, prices, research — and synthesize it with careful attribution and copyright awareness.</p>
+        <span class="arch-tag">Knowledge Retrieval</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">⚙️</div>
+        <h3>Tool Use & Agentic Tasks</h3>
+        <p>Beyond conversation, Claude can use tools, write and execute code, manage files, call APIs, and complete multi-step tasks autonomously through Claude Code and MCP integrations.</p>
+        <span class="arch-tag">Agentic Layer</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🎨</div>
+        <h3>Multimodal Understanding</h3>
+        <p>Claude reads images, interprets charts, and analyzes documents. Upload a PDF, screenshot, or diagram and Claude extracts meaning, answers questions, and takes action.</p>
+        <span class="arch-tag">Vision & Documents</span>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">🔄</div>
+        <h3>Adaptive Reasoning</h3>
+        <p>Claude doesn't just pattern-match. It reasons step-by-step, considers multiple perspectives, acknowledges uncertainty, and revises conclusions when new evidence emerges.</p>
+        <span class="arch-tag">Reasoning Engine</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <p class="section-label">Services</p>
+        <h2 class="section-title">What Claude <em>does</em> for you</h2>
+      </div>
+      <p class="section-sub">From writing to code to research — a single intelligence across every domain.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card featured">
+        <p class="service-num">01</p>
+        <h3>Writing & Content Creation</h3>
+        <p class="service-desc">Drafts, edits, rewrites, and transforms. Essays, emails, scripts, marketing copy, technical documentation — Claude writes with voice, clarity, and purpose.</p>
+        <ul class="service-list">
+          <li>Long-form essays and articles</li>
+          <li>Marketing copy & ad creative</li>
+          <li>Email drafts and professional comms</li>
+          <li>Creative fiction and storytelling</li>
+          <li>Technical documentation</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <p class="service-num">02</p>
+        <h3>Code & Engineering</h3>
+        <p class="service-desc">Claude writes, reviews, debugs, and explains code across dozens of languages and frameworks. From quick scripts to full application architecture.</p>
+        <ul class="service-list">
+          <li>Full application development</li>
+          <li>Bug diagnosis and refactoring</li>
+          <li>Code review and optimization</li>
+          <li>Architecture design & planning</li>
+          <li>CLI tools via Claude Code</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <p class="service-num">03</p>
+        <h3>Research & Analysis</h3>
+        <p class="service-desc">Synthesize papers, compare sources, extract insights from documents, and build structured summaries from complex materials — with citations and honesty.</p>
+        <ul class="service-list">
+          <li>Literature review and synthesis</li>
+          <li>Document summarization</li>
+          <li>Competitive and market analysis</li>
+          <li>Data interpretation</li>
+          <li>Fact-checking with web search</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <p class="service-num">04</p>
+        <h3>Learning & Tutoring</h3>
+        <p class="service-desc">Learn anything. Claude explains concepts from first principles, builds on your existing knowledge, answers follow-up questions, and adapts to your pace and background.</p>
+        <ul class="service-list">
+          <li>Concept explanation at any level</li>
+          <li>Problem-solving and practice</li>
+          <li>Language learning and translation</li>
+          <li>Math, science, and engineering</li>
+          <li>Interview and exam preparation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="demo">
+  <div class="container">
+    <div class="demo-container">
+      <div>
+        <p class="section-label">See it in action</p>
+        <h2 class="section-title">A conversation<br>that <em>thinks</em></h2>
+        <p class="section-sub">Claude responds with depth, nuance, and context. Every message is an opportunity to explore, build, and understand — together.</p>
+        <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 20px; height: 20px; border-radius: 50%; background: var(--sage-light); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: var(--sage);">✓</div>
+            <span style="font-size: 0.875rem; color: var(--ink-light);">Understands follow-up context</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 20px; height: 20px; border-radius: 50%; background: var(--sage-light); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: var(--sage);">✓</div>
+            <span style="font-size: 0.875rem; color: var(--ink-light);">Admits uncertainty when unsure</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 20px; height: 20px; border-radius: 50%; background: var(--sage-light); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: var(--sage);">✓</div>
+            <span style="font-size: 0.875rem; color: var(--ink-light);">Adapts tone to your style</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 20px; height: 20px; border-radius: 50%; background: var(--sage-light); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: var(--sage);">✓</div>
+            <span style="font-size: 0.875rem; color: var(--ink-light);">200K token context — no memory loss</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="chat-avatar">
+            <svg viewBox="0 0 16 16"><path d="M8 1.5L14.5 5.5V10.5L8 14.5L1.5 10.5V5.5L8 1.5Z"/><circle cx="8" cy="8" r="2" fill="#C4632A"/></svg>
+          </div>
+          <div>
+            <div class="chat-name">Claude</div>
+            <div class="chat-status"><div class="status-dot"></div> Active</div>
+          </div>
+        </div>
+        <div class="chat-body">
+          <div class="msg user">
+            <div class="msg-label">You</div>
+            <div class="bubble">Can you explain how neural networks learn, like I'm a curious 16-year-old?</div>
+          </div>
+          <div class="msg claude">
+            <div class="msg-label">Claude</div>
+            <div class="bubble">Think of a neural network like a massive game of telephone — but instead of just passing messages, the network is learning to improve with every mistake it makes.<br><br>It starts knowing nothing. When it guesses wrong, it adjusts thousands of tiny "dials" (weights) to do slightly better next time. After millions of examples, the pattern emerges.<br><br>Want me to walk through a concrete example — like how it learns to recognize a cat photo?</div>
+          </div>
+          <div class="msg user">
+            <div class="msg-label">You</div>
+            <div class="bubble">Yes! And can you show me some actual Python code too?</div>
+          </div>
+          <div class="msg claude">
+            <div class="msg-label">Claude</div>
+            <div class="bubble">Absolutely. Here's the simplest possible neural network in Python using PyTorch — just 15 lines to recognize handwritten digits...</div>
+          </div>
+        </div>
+        <div class="chat-input-bar">
+          <input class="chat-input" type="text" placeholder="Ask Claude anything..." readonly>
+          <button class="send-btn">
+            <svg viewBox="0 0 14 14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7L2 2l2 5-2 5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="principles" id="principles">
+  <div class="container">
+    <p class="section-label">Design Principles</p>
+    <h2 class="section-title">Built on <em>values</em></h2>
+    <p class="section-sub">Claude isn't just capable. It's designed with a clear point of view on what AI should be.</p>
+    <div class="principles-grid">
+      <div class="principle-item">
+        <div class="principle-num">01</div>
+        <h4>Helpful</h4>
+        <p>Claude aims to be genuinely useful — not just technically correct, but practically valuable. It works hard to understand what you actually need.</p>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">02</div>
+        <h4>Honest</h4>
+        <p>Claude says "I don't know" when it doesn't know. It won't invent facts, fake citations, or confidently mislead you — even when honesty is harder.</p>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">03</div>
+        <h4>Harmless</h4>
+        <p>Designed to avoid helping with things that could cause serious harm. Not through rigid refusal, but through genuine ethical understanding.</p>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">04</div>
+        <h4>Nuanced</h4>
+        <p>The world is complex. Claude resists oversimplification, acknowledges multiple perspectives, and earns your trust by treating hard questions with care.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;">
+    <div>
+      <p class="section-label">How it works</p>
+      <h2 class="section-title">From first message<br>to <em>real results</em></h2>
+      <p class="section-sub">Claude is designed to make every conversation productive from the very first exchange.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Start a conversation</h4>
+          <p>Type anything — a question, a task, a problem, or just a thought. Claude is ready immediately. No setup, no configuration, no learning curve.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Provide context</h4>
+          <p>Upload files, share code, paste articles, or describe your background. The more context Claude has, the more precisely tailored its response will be.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Iterate and refine</h4>
+          <p>Claude remembers everything in your conversation. Ask follow-up questions, request changes, push back, and go deeper. The best results come from dialogue.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>Export and act</h4>
+          <p>Take your outputs — documents, code, summaries, plans — and use them directly. Or integrate Claude via API into your own products and workflows.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <p class="section-label" style="color: var(--terra-light);">From real users</p>
+    <h2 class="section-title" style="color: var(--cream);">What people <em>say</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <blockquote>"Claude is the first AI that actually admits when it's uncertain. That honesty makes me trust it for real research work."</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar">SR</div>
+          <div>
+            <div class="testi-name">Sofia R.</div>
+            <div class="testi-role">PhD Researcher, MIT</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <blockquote>"I've shipped three products faster than ever before. Claude reviews my code, explains tradeoffs, and catches bugs I'd miss at 2am."</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: var(--sage);">JT</div>
+          <div>
+            <div class="testi-name">James T.</div>
+            <div class="testi-role">Senior Engineer, Stripe</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <blockquote>"The depth of analysis Claude brings to strategic documents is remarkable. It's like having a brilliant, patient advisor available always."</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: var(--gold);">MK</div>
+          <div>
+            <div class="testi-name">Maya K.</div>
+            <div class="testi-role">VP Strategy, Series B Startup</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <p class="section-label" style="text-align:center;">Get started</p>
+    <h2 class="section-title" style="text-align:center; margin: 0 auto 1.2rem;">Ready to think <em>better?</em></h2>
+    <p class="section-sub">Join millions using Claude to write, build, learn, and create with an AI that respects your intelligence.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-primary">
+        Start free — no card needed
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </a>
+      <a href="#" class="btn-secondary">View API docs</a>
+    </div>
+    <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--ink-muted);">Free tier available. Claude Pro from $20/month. Enterprise pricing on request.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Anthropic, PBC. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">API</a>
+    <a href="#">Careers</a>
+    <a href="#">Blog</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        entry.target.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.arch-card, .service-card, .principle-item, .step, .testi-card, .purpose-stat').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
