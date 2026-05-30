@@ -1,6 +1,6 @@
 # Claude — Intelligent Thinking Partner
 
-A fully static, single-file landing page for Claude, the AI assistant built by Anthropic. This project presents Claude's purpose, architecture, services, and design principles through a production-grade editorial web experience.
+A fully static, single-file landing page for Claude, the AI assistant built by Anthropic. This project presents Claude's purpose, architecture, services, and design principles through a production-grade editorial web experience
 
 ---
 
